@@ -1,0 +1,79 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+"use strict";
+const {Ci,Cu,Cc} = require("chrome");
+const {setTimeout} = require("timers");
+const {WindowTracker} = require("window-utils");
+const request = require("request");
+
+Cu.import("resource://gre/modules/Services.jsm", this);
+
+// list of hosts granted access permission to apps installation list
+/**
+ * User profile object
+*/
+
+/*
+function recommendLinks() {
+   console.log("hello");
+   let req = request.Request({
+        url: "http://127.0.0.1:4355/nytimes/mostpopular/Technology.json",
+        onComplete: function(response) {
+          dump( "response" + response.status );
+          if( response.status == 200 ) {
+            console.log(JSON.stringify(response.json));
+          }
+          else {
+            dump("failed to load\n");
+          }
+        }
+      });
+   req.get();
+};
+*/
+
+function addApplicationFrame(document) {
+ dump("JERERER \n");
+/*
+ try {
+  let tabGrid = document.getElementById("newtab-grid");
+  let sideBar = tabGrid.cloneNode(false);
+  sideBar.appendChild(document.createTextNode("HELLO THERE"));
+  sideBar.setAttribute("id" , "sidebar");
+  sideBar.setAttribute("style" , "display: -moz-box;  margin: 10px 50px 20px 0px;");
+  tabGrid.parentNode.appendChild(sideBar);
+
+  let window = document.defaultView;
+  let nesting = 0;
+
+  // Add a row and cell for the showing the app frame
+  //recommendLinks();
+ } catch ( ex ) {
+  console.log( "Error " + ex );
+ }
+*/
+}
+
+exports.main = function(options) {
+ dump( "\nHELLO-----------\n");
+  // per-window initialization
+  function onContentLoaded(event) {
+    if (event.target.location == "about:newtab") {
+      dump("I AM HERE \n");
+      addApplicationFrame(event.target);
+    }
+  }
+
+  // set up the window tracker
+  let tracker = new WindowTracker({
+    onTrack: function(window) {
+      window.addEventListener("DOMContentLoaded", onContentLoaded);
+    }, // end of onTrack
+
+    onUntrack: function(window) {
+      window.removeEventListener("DOMContentLoaded", onContentLoaded);
+    } // end of onUntrack
+  }); // end of wondow tracker
+}

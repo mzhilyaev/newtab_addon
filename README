@@ -1,0 +1,10 @@
+Setup
+
+1.  install up-healinder, downlaod nytimes stories and start headliner server
+   ./scripts/up-headliner-server &
+
+2.  install and start redis 
+  redis-server /usr/local/etc/redis.conf &
+
+3. cfx run 
+

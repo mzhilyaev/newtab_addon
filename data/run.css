@@ -1,0 +1,31 @@
+.linkGrid {
+  display: -moz-box; 
+  overflow-y: auto; 
+  overflow-x: hidden;
+}
+
+.linkList {
+}
+
+.linkItem {
+    width: 300px;
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+.linkImage {
+    width: 40px;
+    margin-right: 8px;
+    vertical-align: top;
+}
+
+.linkDiv {
+  display: inline-block; 
+  width: 150px; 
+  overflow: hidden;
+};
+
+.linkRef {
+    font-size: 16px;
+}
+
